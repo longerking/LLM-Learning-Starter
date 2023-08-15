@@ -93,6 +93,10 @@ coast:12.4483s
 
 > FastAPI: [https://fastapi.tiangolo.com/](https://fastapi.tiangolo.com/)
 
+以下代码已经不太规范，只是一个流式调用ChatGLM2 API的方式，建议使用ChatGLM2官方提供的样例代码部署测试，或者式后文的FastChat方式！
+> ChatGLM2-6B: [https://github.com/THUDM/ChatGLM2-6B](https://github.com/THUDM/ChatGLM2-6B)
+> https://github.com/THUDM/ChatGLM2-6B/blob/main/openai_api.py
+
 ```python
 # -*-coding:utf-8-*-
 '''
