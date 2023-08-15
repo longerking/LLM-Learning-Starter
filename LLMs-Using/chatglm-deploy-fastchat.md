@@ -2,7 +2,7 @@
 description: 利用FastChat部署ChatGLM
 ---
 
-# FastChat以OpenAI对接ChatGLM
+# ChatGLM-Deploy-FastChat
 
 Reference
 
@@ -110,7 +110,7 @@ python3 -m fastchat.serve.controller
 
 **Then, launch the model worker(s)**
 
-```PowerShell
+```sh
 #  screen -S fs-glm-wkr
 python3 -m fastchat.serve.model_worker --model-path /mnt/models/chatglm2-6b
 
@@ -121,7 +121,7 @@ python3 -m fastchat.serve.model_worker --model-path /mnt/models/chatglm2-6b
 
 **Finally, launch the RESTful API server**
 
-```PowerShell
+```shell
 #  screen -S fs-glm-api
 python3 -m fastchat.serve.openai_api_server --host localhost --port 8000
 # localhost 建议使用局域网或者公网地址，这是对外的api接口
@@ -133,7 +133,7 @@ python3 -m fastchat.serve.openai_api_server --host localhost --port 8000
 
 **Launch the Gradio web server**
 
-```PowerShell
+```sh
 # 使用fastchat gradio页面来查看加载的模型
 # screen -S fs-glm-grd
 python3 -m fastchat.serve.gradio_web_server
@@ -160,7 +160,7 @@ Hello! My name is Noxix. I am an AI chatbot designed to assist you with any ques
 
 `chatglm.py` 内容如下
 
-```Python
+```python
 # pip install --upgrade openai
 import openai
 # to get proper authentication, make sure to use a valid key that's listed in
@@ -213,7 +213,7 @@ def chat(mess):
 
 Using CMD `curl http://hostserver:8000/v1/models`， then
 
-```JSON
+```json
 // curl http://hostserver:8000/v1/models
 {
     "object": "list",
@@ -248,7 +248,7 @@ Using CMD `curl http://hostserver:8000/v1/models`， then
 
 #### Chat Completions
 
-```JSON
+```sh
 curl http://localhost:8000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{    "model": "vicuna-7b-v1.3",    "messages": [{"role": "user", "content": "Hello! What is your name?"}]  }'
@@ -256,7 +256,7 @@ curl http://localhost:8000/v1/chat/completions \
 
 #### Text Completions
 
-```JSON
+```sh
 curl http://localhost:8000/v1/completions \
   -H "Content-Type: application/json" \
   -d '{    "model": "vicuna-7b-v1.3",    "prompt": "Once upon a time",    "max_tokens": 41,    "temperature": 0.5  }'
@@ -264,7 +264,7 @@ curl http://localhost:8000/v1/completions \
 
 #### Embeddings:
 
-```JSON
+```sh
 curl http://localhost:8000/v1/embeddings \
   -H "Content-Type: application/json" \
   -d '{    "model": "vicuna-7b-v1.3",    "input": "Hello world!"  }'
@@ -276,7 +276,7 @@ curl http://localhost:8000/v1/embeddings \
 
 If you want to run multiple models on the same machine and in the same process, you can replace the `model_worker` step above with a multi model variant:
 
-```PowerShell
+```sh
 # screen -r fs-glm-wkr
 
 python3 -m fastchat.serve.multi_model_worker \
