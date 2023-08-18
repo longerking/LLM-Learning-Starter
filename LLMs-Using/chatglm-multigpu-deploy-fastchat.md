@@ -284,7 +284,7 @@ python3 -m fastchat.serve.openai_api_server --host localhost --port 8001  --cont
 
 ### 总结
 
-上述实现了一台机器上多显卡部署多模型。很容易观察到修改host为局域网地址，可以实现多节点多卡多模型部署。
+上述实现了一台机器上多显卡部署多模型。很容易观察到修改host为局域网地址，可以实现多节点多卡多模型部署。即如下的流程图。
 
-
+<figure><img src=".gitbook/assets/fastchat-deploy-multi-models.png" alt=""><figcaption><p>FastChat-Deploy-Multi-Models</p></figcaption></figure>
 
