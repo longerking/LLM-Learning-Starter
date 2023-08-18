@@ -11,7 +11,7 @@ Reference
 \
 `Note`： 一些screen窗口会话知识预备
 
-```PowerShell
+```sh
 screen -S fs-glm-wkr # 创建一个名为fs-glm-wkr的会话
 # ctrl+shift+d # 退出当前会话窗口，但会话内容保持后台
 screen -r fs-glm-wkr # 连接到 fs-glm-wkr 会话窗口
@@ -27,7 +27,7 @@ screen -D -r fs-glm-wkr # 强制重连已经Attacted状态的窗口
 
 使用依赖包安装或者使用源码安装，二选一即可。如果FastChat还不支持的模型，建议使用源码安装，再源码集成支持模型后在源码安装依赖包。 `Note`: FastChat支持对接chatglm是因为源码中，已经做了这部分的配置集成。这里的测试使用pip安装。
 
-```PowerShell
+```sh
 pip3 install fschat
 # or
 git clone https://github.com/lm-sys/FastChat.git
@@ -47,14 +47,14 @@ pip3 install -e .
 
 cli运行脚本如下
 
-```PowerShell
+```sh
 python3 -m fastchat.serve.cli \
         --model-path /mnt/models/chatglm2-6b
 ```
 
 如图，会在终端生成如下交互问答
 
-````PowerShell
+````prolog
 (chatglm)longer@codeWL$ python3 -m fastchat.serve.cli --model-path /mnt/models/chatglm2-6b
 Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [00:13<00:00,  1.18it/s]
 问: 你是谁？
@@ -95,7 +95,7 @@ fastchat :(4437912：您想说什么
 
 **First Lunch a fastchat.serve.controller。**
 
-```PowerShell
+```prolog
 # screen -S fs-glm-ctl
 python3 -m fastchat.serve.controller
 
@@ -152,7 +152,7 @@ Grade web Page：上面的model\_worker只选择了一个，所以这里只显�
 
 运行 `chatglm.py` 脚本会得到如下的ResponseText
 
-```PowerShell
+```sh
 (chatai) PS E:\TestGLM\src> python chatglm.py
 你好，作为一名人工智能助手，我无法感受到情感，但我可以提供帮助。 请问有什么问题我可以解答吗？
 Hello! My name is Noxix. I am an AI chatbot designed to assist you with any questions or tasks you may have. How can I help you today?

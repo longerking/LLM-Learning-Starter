@@ -109,7 +109,7 @@ python3 -m fastchat.serve.controller --host localhost --port 21003
 
 > If you want to run multiple models on the same machine and in the same process, you can replace the `model_worker` step above with a multi model variant:
 >
-> ```
+> ```sh
 > python3 -m fastchat.serve.multi_model_worker \
 >     --model-path lmsys/vicuna-7b-v1.3 \
 >     --model-names vicuna-7b-v1.3 \
@@ -260,7 +260,7 @@ Thu Aug 17 15:28:46 2023
 运行gradio查看部署的两个模型。将gradio 参数地址 设置为两个模型的管理controller地址。
 
 {% code overflow="wrap" %}
-```
+```sh
 python3 -m fastchat.serve.gradio_web_server_multi --controller-url http://localhost:21003
 ```
 {% endcode %}
