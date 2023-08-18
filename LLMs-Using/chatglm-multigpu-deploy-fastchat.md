@@ -167,7 +167,6 @@ python3 -m fastchat.serve.controller --host localhost --port 21003
 
 我们尝试运行，从输出结果可以看到num\_gpus=1，即可用gpu只有一个，默认这个源代码是不支持指定GPU运行模型的。
 
-{% code overflow="wrap" %}
 ```sh
 python3 -m fastchat.serve.multi_model_worker \
     --model-path  /root/wanglang/models/chatglm2-6b \
@@ -182,7 +181,6 @@ python3 -m fastchat.serve.multi_model_worker \
 # 发现显存存溢出了，说明这两个模型还是在一张显卡上面跑。
 
 ```
-{% endcode %}
 
 
 
@@ -199,14 +197,22 @@ python3 -m fastchat.serve.multi_model_worker \
 
 这里相当于制定了显卡，并运行了两次服务，分别端口不同，我们继续运行下面的脚本测试
 
-<pre class="language-sh" data-overflow="wrap"><code class="lang-sh"><strong># 显卡0被占用
+<pre class="language-sh"><code class="lang-sh"><strong># 显卡0被占用
 </strong># 显卡1
 # screen -S wl-fschat-multi-gpu1-wkrs
-CUDA_VISIBLE_DEVICES=1 python3 -m fastchat.serve.model_worker --model-path /root/wanglang/models/chatglm2-6b-32k --controller http://localhost:21003 --port 31000 --worker http://localhost:31000
+CUDA_VISIBLE_DEVICES=1 python3 -m fastchat.serve.model_worker \
+    --model-path /root/wanglang/models/chatglm2-6b-32k \
+    --controller http://localhost:21003 \
+    --port 31000 \
+    --worker http://localhost:31000
 
 # 显卡2
 # screen -S wl-fschat-multi-gpu2-wkrs
-<strong>CUDA_VISIBLE_DEVICES=2 python3 -m fastchat.serve.model_worker --model-path /root/wanglang/models/chatglm2-6b-int4 --controller http://localhost:21003  --port 31001 --worker http://localhost:31001
+<strong>CUDA_VISIBLE_DEVICES=2 python3 -m fastchat.serve.model_worker \
+</strong><strong>    --model-path /root/wanglang/models/chatglm2-6b-int4 \
+</strong><strong>    --controller http://localhost:21003  \
+</strong><strong>    --port 31001 \
+</strong><strong>    --worker http://localhost:31001
 </strong></code></pre>
 
 运行后我们查看显卡，发现显卡1和显卡2已经被占用了，显卡0是被之前服务占用了。
@@ -259,11 +265,10 @@ Thu Aug 17 15:28:46 2023
 
 运行gradio查看部署的两个模型。将gradio 参数地址 设置为两个模型的管理controller地址。
 
-{% code overflow="wrap" %}
 ```sh
-python3 -m fastchat.serve.gradio_web_server_multi --controller-url http://localhost:21003
+python3 -m fastchat.serve.gradio_web_server_multi \
+    --controller-url http://localhost:21003
 ```
-{% endcode %}
 
 运行以上代码，就可以在Gradio的页面中看到部署的两个模型了
 
@@ -273,16 +278,17 @@ python3 -m fastchat.serve.gradio_web_server_multi --controller-url http://localh
 
 以OpenAI方式提供 RESTful API部署，模型管理地址指向controller地址
 
-{% code overflow="wrap" %}
 ```sh
-python3 -m fastchat.serve.openai_api_server --host localhost --port 8001  --controller-address  http://localhost:21003
+python3 -m fastchat.serve.openai_api_server \
+    --host localhost \
+    --port 8001  \
+    --controller-address  http://localhost:21003
 # 如果需要提供给局域网，将localhost设置为主机局域网外部可访问IP即可
 ```
-{% endcode %}
 
 
 
-### 总结
+## 总结
 
 上述实现了一台机器上多显卡部署多模型。很容易观察到修改host为局域网地址，可以实现多节点多卡多模型部署。即如下的流程图。
 
