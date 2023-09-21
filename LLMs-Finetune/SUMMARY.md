@@ -1,3 +1,3 @@
 # Table of contents
 
-* [Page](README.md)
+* [ChatGLM2-6b-pt-v2](README.md)
