@@ -117,7 +117,7 @@ python3 -m fastchat.serve.controller --host localhost --port 21003
 >     --model-names longchat-7b-16k
 > ```
 
-我们可以查看这种方式是可以运行多个模型的，但是是不是运行到不同的GPT上呢？我们可以查看`fastchat.serve.multi_model_worker.py` 源代码里的参数
+我们可以查看这种方式是可以运行多个模型的，但是，不是运行到不同的GPU上呢？我们可以查看`fastchat.serve.multi_model_worker.py` 源代码里的参数
 
 <pre class="language-python"><code class="lang-python"><strong># ......
 </strong><strong># ......
@@ -182,7 +182,7 @@ python3 -m fastchat.serve.multi_model_worker \
 
 ```
 
-
+或许这里可以通过设置args.num\_gpus 这个参数来指定显卡数量的，这样就不会运行到一个显卡上了。
 
 #### 方式2
 
